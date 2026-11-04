@@ -1,0 +1,9 @@
+{
+  "name": "book-launch-countdown-page-template",
+  "version": "1.0.0",
+  "description": "Static single-page countdown template for a book launch day - pre-order links, sample chapter, newsletter embed placeholder, media kit. Pure HTML/CSS/JS.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/run-tests.js"
+  }
+}

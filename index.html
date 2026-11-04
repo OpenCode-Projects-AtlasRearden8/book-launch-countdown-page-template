@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launching Soon: The Massive AI Manual</title>
+  <style>
+    :root {
+      --color-bg: #180c22;
+      --color-bg-soft: #241238;
+      --color-surface: #ffffff;
+      --color-text: #ffffff;
+      --color-text-dim: rgb(255 255 255 / 62%);
+      --color-accent: #7c4dff;
+      --color-accent-soft: #9b71ff;
+      --color-highlight: #ffcb45;
+      --color-border: rgb(255 255 255 / 14%);
+      --radius: 16px;
+      --font-body: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background:
+        radial-gradient(1100px 620px at 82% -10%, #472a72c9, transparent 62%),
+        radial-gradient(900px 520px at -12% 108%, #35214fc4, transparent 60%),
+        var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.65;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      background: var(--color-surface);
+      color: #2a1832;
+      padding: 10px 16px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+    .skip-link:focus { left: 12px; top: 12px; }
+
+    header.site-header {
+      padding: 22px 0 6px;
+      text-align: center;
+    }
+    .series-name {
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      margin: 0;
+    }
+
+    main { padding-bottom: 56px; }
+
+    .hero { text-align: center; padding: 46px 0 30px; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      line-height: 1.18;
+      margin: 0 auto 14px;
+      max-width: 720px;
+    }
+    .hero .book-title {
+      color: var(--color-highlight);
+      font-style: italic;
+    }
+    .hook {
+      max-width: 640px;
+      margin: 0 auto;
+      color: var(--color-text-dim);
+      font-size: 1.06rem;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: clamp(8px, 2.4vw, 18px);
+      margin: 38px auto 8px;
+      flex-wrap: wrap;
+    }
+    .cd-unit {
+      min-width: clamp(66px, 17vw, 108px);
+      padding: 16px 6px 13px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%));
+      border: 1px solid var(--color-border);
+    }
+    .cd-value {
+      display: block;
+      font-size: clamp(1.5rem, 5vw, 2.4rem);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+    }
+    .cd-label {
+      display: block;
+      margin-top: 3px;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+
+    .launch-line {
+      margin-top: 16px;
+      color: var(--color-text-dim);
+      font-size: 0.92rem;
+    }
+
+    /* ---------- generic sections ---------- */
+    section { padding: 46px 0 6px; }
+    section h2 {
+      font-size: clamp(1.3rem, 3.4vw, 1.7rem);
+      margin: 0 0 6px;
+    }
+    .section-lede { color: var(--color-text-dim); margin: 0 0 20px; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--color-surface);
+      color: #2a1832;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .link-card:hover,
+    .link-card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgb(0 0 0 / 35%);
+    }
+    .store-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: #efe6ff;
+      color: #5a2fb8;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    .store-name { font-weight: 700; font-size: 1.05rem; }
+    .store-note { font-size: 0.86rem; color: #5c4a6b; overflow-wrap: anywhere; }
+
+    /* ---------- sample chapter ---------- */
+    .download-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-size: 0.98rem;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-primary:focus-visible { background: var(--color-accent-soft); }
+    .btn-secondary {
+      background: rgb(255 255 255 / 8%);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+    .btn-secondary:hover, .btn-secondary:focus-visible { background: rgb(255 255 255 / 16%); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .excerpt {
+      margin-top: 20px;
+      background: rgb(0 0 0 / 26%);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+    }
+    .excerpt blockquote {
+      margin: 0;
+      font-style: italic;
+      color: var(--color-text-dim);
+      border-left: 3px solid var(--color-accent);
+      padding-left: 16px;
+    }
+    .excerpt figcaption { margin-top: 10px; font-size: 0.86rem; color: var(--color-text-dim); }
+
+    #chapter-status {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--color-highlight);
+      min-height: 1.2em;
+    }
+
+    /* ---------- newsletter ---------- */
+    .newsletter-card {
+      background: var(--color-surface);
+      color: #2a1832;
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      max-width: 620px;
+    }
+    .newsletter-card h2 { margin: 0 0 6px; }
+    .newsletter-card p { margin: 0 0 16px; color: #5c4a6b; }
+    #newsletter-embed { max-width: 100%; overflow-x: auto; }
+    .embed-hint {
+      border: 2px dashed #c9b6e8;
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: center;
+      color: #6b5488;
+      font-size: 0.92rem;
+      background: #faf7ff;
+    }
+    #newsletter-embed iframe,
+    #newsletter-embed form {
+      max-width: 100%;
+    }
+
+    /* ---------- media kit ---------- */
+    .media-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      max-width: 620px;
+    }
+    .media-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      background: rgb(255 255 255 / 5%);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 13px 18px;
+    }
+    .media-name { font-weight: 600; }
+    .media-meta { color: var(--color-text-dim); font-size: 0.84rem; }
+
+    footer.site-footer {
+      border-top: 1px solid var(--color-border);
+      padding: 26px 0 34px;
+      text-align: center;
+      color: var(--color-text-dim);
+      font-size: 0.88rem;
+    }
+    footer .credit { display: block; margin-top: 5px; }
+
+    .privacy-note { color: var(--color-text-dim); font-size: 0.8rem; margin-top: 14px; }
+
+    @media (max-width: 640px) {
+      .hero { padding-top: 30px; }
+      .countdown { gap: 8px; }
+      .cd-unit { padding: 12px 4px 10px; }
+      .hero h1 { margin-bottom: 10px; }
+      section { padding: 34px 0 4px; }
+      .media-list li { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <p class="series-name">From Dylan Asdale &middot; Asdale Dynamics, LLC</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 id="hero-title"><span class="book-title">The Massive AI Manual</span> is almost here</h1>
+        <p class="hook" id="hook-line">Learn AI the way a friend would explain it: plain English, step by step, never condescending. Every tool, agent, and idea covered from absolute zero.</p>
+
+        <!-- Big countdown timer; set LAUNCH_DATE in config.js -->
+        <div class="countdown" id="countdown" role="timer" aria-live="off">
+          <div class="cd-unit"><span class="cd-value" id="cd-days">-&#8211;</span><span class="cd-label">Days</span></div>
+          <div class="cd-unit"><span class="cd-value" id="cd-hours">-&#8211;</span><span class="cd-label">Hours</span></div>
+          <div class="cd-unit"><span class="cd-value" id="cd-mins">-&#8211;</span><span class="cd-label">Minutes</span></div>
+          <div class="cd-unit"><span class="cd-value" id="cd-secs">-&#8211;</span><span class="cd-label">Seconds</span></div>
+          <span id="cd-live" hidden aria-hidden="true"></span>
+        </div>
+        <p class="launch-line" id="launch-line"></p>
+      </section>
+
+      <section aria-labelledby="preorder-title">
+          <h2 id="preorder-title">Pre-order or grab it early</h2>
+          <p class="section-lede">Pick your favorite store. Pre-orders help independent books more than you know.</p>
+          <div class="card-grid" id="store-links"></div>
+      </section>
+
+      <section aria-labelledby="sample-title">
+        <h2 id="sample-title">Read a free chapter</h2>
+        <p class="section-lede">Not sure it&rsquo;s for you? Download the sample chapter and judge for yourself. No email required.</p>
+        <div class="download-row">
+          <a class="btn btn-primary" id="btn-download" href="#" download>Download sample chapter (PDF)</a>
+          <a class="btn btn-secondary" id="btn-read-online" href="#">Read it in the browser</a>
+        </div>
+        <p id="chapter-status" role="status"></p>
+        <figure class="excerpt">
+          <blockquote id="excerpt-quote"></blockquote>
+          <figcaption id="excerpt-source"></figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="newsletter-title">
+        <h2 id="newsletter-title">Get launch-day alerts</h2>
+        <p class="section-lede">One email when the book is live, plus a free tip sheet a few days before launch. Unsubscribe any time.</p>
+        <div class="newsletter-card">
+          <!-- Paste your Mailchimp / Buttondown / ConvertKit embed code into newsletterEmbed in config.js -->
+          <div id="newsletter-embed" aria-busy="true"></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="mediakit-title">
+        <h2 id="mediakit-title">Media &amp; press kit</h2>
+        <p class="section-lede">Writing about the book or want to interview Dylan? Everything you need is right here.</p>
+        <ul class="media-list" id="media-list"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p id="footer-text">This is a launch-day page for <em>The Massive AI Manual</em> &mdash; a plain-English AI manual for total beginners.</p>
+      <p class="credit">Made with care by Asdale Dynamics, LLC &middot; <span id="copyright-line"></span></p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="countdown.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
